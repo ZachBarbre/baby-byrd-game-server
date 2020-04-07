@@ -22,7 +22,7 @@ class GuessModel {
         try {
             const response = await db.one(
                 `INSERT INTO guesses (name, birthdate, weight, sex)
-                VALUSE ($1, $2, $3, $4)`,[name, birthdate, weight, sex]
+                VALUES ($1, $2, $3, $4) RETURNING id`,[name, birthdate, weight, sex]
             );
             return response;
         } catch (error) {
@@ -43,3 +43,5 @@ class GuessModel {
         }
     }
 }
+
+module.exports = GuessModel;
