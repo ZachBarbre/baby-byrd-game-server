@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const guessSchema = new Schema({
+const GuessSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -16,10 +16,10 @@ const guessSchema = new Schema({
   },
   sex: {
     type: String, 
-    enum: [boy, girl],
+    enum: ['boy', 'girl'],
     required: true
   }
 });
 
 module.exports = 
-  guessesModel = mongoose.model('guesses', guessSchema);
+  GuessesModel = mongoose.model('guesses', GuessSchema);

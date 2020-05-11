@@ -1,9 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+const GuessesModel = require('../models/GuessesModel');
+
+// GET guesses 
+router.get('/', async (req, res) => {
+  const guesses = await GuessesModel.find();
+  res.json(guesses);
 });
 
 module.exports = router;
