@@ -1,4 +1,5 @@
 const express = require('express');
+const moment = require('moment');
 const router = express.Router();
 
 const GuessesModel = require('../models/GuessesModel');
@@ -6,7 +7,15 @@ const GuessesModel = require('../models/GuessesModel');
 // GET guesses 
 router.get('/', async (req, res) => {
   const guesses = await GuessesModel.find();
-  res.json(guesses);
+  const formatDateGuesses = guesses.map(guess => {
+    const formatBirthDate = moment(guess.birthDate).format('MMM Do');
+    const updateGuess = {...guess.toObject()}
+    return {
+      ...updateGuess,
+      birthDate: formatBirthDate
+    }
+  })
+  res.json(formatDateGuesses);
 });
 
 router.post('/', async (req, res) => {
