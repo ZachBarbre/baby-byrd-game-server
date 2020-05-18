@@ -27,8 +27,7 @@ router.post('/', async (req, res) => {
   });
   try {
     const guess = await newGuess.save();
-    console.log(guess);
-    res.json(guess);
+    res.json(newGuess.toObject());
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
