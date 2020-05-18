@@ -8,7 +8,7 @@ const GuessesModel = require('../models/GuessesModel');
 router.get('/', async (req, res) => {
   const guesses = await GuessesModel.find();
   const formatDateGuesses = guesses.map(guess => {
-    const formatBirthDate = moment(guess.birthDate).format('MMM Do');
+    const formatBirthDate = moment(guess.birthDate).format('MMMM Do');
     const updateGuess = {...guess.toObject()}
     return {
       ...updateGuess,
@@ -27,8 +27,7 @@ router.post('/', async (req, res) => {
   });
   try {
     const guess = await newGuess.save();
-    console.log(guess);
-    res.json(guess);
+    res.json(newGuess.toObject());
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
